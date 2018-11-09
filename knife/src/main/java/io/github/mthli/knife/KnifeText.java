@@ -834,9 +834,9 @@ public class KnifeText extends EditText implements TextWatcher {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
-    public void fromHtml(String source) {
+    public void fromHtml(String source, KnifeText knife) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(KnifeParser.fromHtml(source));
+        builder.append(KnifeParser.fromHtml(source, knife));
         switchToKnifeStyle(builder, 0, builder.length());
         setText(builder);
     }

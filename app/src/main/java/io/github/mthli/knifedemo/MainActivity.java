@@ -35,9 +35,12 @@ public class MainActivity extends Activity {
 
         knife = (KnifeText) findViewById(R.id.knife);
         // ImageGetter coming soon...
-        knife.fromHtml(EXAMPLE);
+        String two = "this is a test of <b>ImageGetter</b> it contains " +
+                "two images: <br/>" +
+                "<img src=\"https://www.guidedogs.org/wp-content/uploads/2018/01/Mobile.jpg\"><br/>and<br/>" +
+                "<img src=\"http://developer.android.com/assets/images/icon_search.png\">";
+        knife.fromHtml(two, knife);
         knife.setSelection(knife.getEditableText().length());
-
         setupBold();
         setupItalic();
         setupUnderline();
