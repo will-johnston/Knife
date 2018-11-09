@@ -1,6 +1,6 @@
 package io.github.mthli.knife;
 
-import android.content.res.Resources;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -24,7 +24,7 @@ import static android.content.ContentValues.TAG;
 
 public class KnifeImageGetter implements ImageGetter {
 
-    private TextView textView;
+    private final TextView textView;
 
 
     KnifeImageGetter(TextView textView) {
@@ -34,15 +34,17 @@ public class KnifeImageGetter implements ImageGetter {
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
-        Drawable empty = Resources.getSystem().getDrawable(android.R.mipmap.sym_def_app_icon);
-        d.addLevel(0, 0, empty);
-        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+//        Drawable empty = Resources.getSystem().getDrawable(android.R.mipmap.sym_def_app_icon);
+//        d.addLevel(0, 0, empty);
+//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
 
         new LoadImage().execute(source, d);
 
         return d;
     }
 
+    @SuppressLint("StaticFieldLeak")
     class LoadImage extends AsyncTask<Object, Void, Bitmap> {
 
         private LevelListDrawable mDrawable;
@@ -96,7 +98,7 @@ public class KnifeImageGetter implements ImageGetter {
         }
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+    private Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
         float scaleWidth = ((float) newWidth) / width;
