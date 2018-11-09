@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
         String two = "this is a test of <b>ImageGetter</b> it contains " +
                 "two images: <br/>" +
                 "<img src=\"https://www.guidedogs.org/wp-content/uploads/2018/01/Mobile.jpg\"><br/>and<br/>" +
-                "<img src=\"http://developer.android.com/assets/images/icon_search.png\">";
+                "<img src=\"https://firebasestorage.googleapis.com/v0/b/noted-a0a2a.appspot.com/o/androidImages%2F-LQGC9fdx_YDf7C4kXRJ?alt=media&token=e953e60d-1afe-4c71-b91c-4ae2fad59e7d\">";
         knife.fromHtml(two, knife);
         knife.setSelection(knife.getEditableText().length());
         setupBold();

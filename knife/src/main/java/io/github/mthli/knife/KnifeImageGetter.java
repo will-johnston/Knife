@@ -24,7 +24,7 @@ import static android.content.ContentValues.TAG;
 
 public class KnifeImageGetter implements ImageGetter {
 
-    private TextView textView = null;
+    private TextView textView;
 
 
     KnifeImageGetter(TextView textView) {
