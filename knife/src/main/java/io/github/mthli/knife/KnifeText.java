@@ -19,6 +19,7 @@ package io.github.mthli.knife;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -834,9 +835,9 @@ public class KnifeText extends EditText implements TextWatcher {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
-    public void fromHtml(String source, KnifeText knife) {
+    public void fromHtml(String source, KnifeText knife, Drawable placeholder) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(KnifeParser.fromHtml(source, knife));
+        builder.append(KnifeParser.fromHtml(source, knife, placeholder));
         switchToKnifeStyle(builder, 0, builder.length());
         setText(builder);
     }

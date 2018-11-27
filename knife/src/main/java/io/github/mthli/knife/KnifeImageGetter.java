@@ -2,7 +2,6 @@ package io.github.mthli.knife;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,35 +11,32 @@ import android.text.Html.ImageGetter;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import static android.content.ContentValues.TAG;
 
 public class KnifeImageGetter implements ImageGetter {
 
     private final TextView textView;
+    private final Drawable placeholder;
 
 
-    KnifeImageGetter(TextView textView) {
+    KnifeImageGetter(TextView textView, Drawable placeholder) {
         this.textView = textView;
+        this.placeholder = placeholder;
     }
+
 
     @Override
     public Drawable getDrawable(String source) {
         LevelListDrawable d = new LevelListDrawable();
-
-//        Drawable empty = Resources.getSystem().getDrawable(android.R.mipmap.sym_def_app_icon);
-//        d.addLevel(0, 0, empty);
-//        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
-
+        d.addLevel(0,0, placeholder);
+        d.setBounds(0,0, placeholder.getIntrinsicWidth(), placeholder.getIntrinsicHeight());
         new LoadImage().execute(source, d);
-
         return d;
     }
 
@@ -57,12 +53,8 @@ public class KnifeImageGetter implements ImageGetter {
 
 
             try {
-                URL url = new URL(source);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream is = urlConnection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                is.close();
-                return bitmap;
+                return Picasso.get().load(source).get();
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -88,8 +80,8 @@ public class KnifeImageGetter implements ImageGetter {
                 }
                 BitmapDrawable d = new BitmapDrawable(bitmap);
                 mDrawable.addLevel(1, 1, d);
-                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
                 mDrawable.setLevel(1);
+                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
                 // refresh text view now that the image is loaded
                 CharSequence t = textView.getText();

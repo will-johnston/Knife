@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -34,12 +35,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         knife = (KnifeText) findViewById(R.id.knife);
-        // ImageGetter coming soon...
+
         String two = "this is a test of <b>ImageGetter</b> it contains " +
                 "two images: <br/>" +
                 "<img src=\"https://www.guidedogs.org/wp-content/uploads/2018/01/Mobile.jpg\"><br/>and<br/>" +
                 "<img src=\"https://firebasestorage.googleapis.com/v0/b/noted-a0a2a.appspot.com/o/androidImages%2F-LQGC9fdx_YDf7C4kXRJ?alt=media&token=e953e60d-1afe-4c71-b91c-4ae2fad59e7d\">";
-        knife.fromHtml(two, knife);
+
+        Drawable placeholder = getResources().getDrawable(R.drawable.loading);
+        knife.fromHtml(two, knife, placeholder);
         knife.setSelection(knife.getEditableText().length());
         setupBold();
         setupItalic();

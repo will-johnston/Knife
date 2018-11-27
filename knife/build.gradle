@@ -22,7 +22,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 2
-        versionName "1.1.1"
+        versionName "1.2"
     }
 
     buildTypes {
@@ -35,4 +35,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
